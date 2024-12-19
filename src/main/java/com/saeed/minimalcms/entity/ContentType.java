@@ -21,4 +21,10 @@ public class ContentType {
 
     @OneToMany(mappedBy = "contentType")
     private List<Content> contents;
+
+    @ManyToMany(mappedBy = "contentTypes")
+    private List<Field> fields;
+
+    @ManyToMany(mappedBy = "contentTypes")
+    private List<Component> components;
 }

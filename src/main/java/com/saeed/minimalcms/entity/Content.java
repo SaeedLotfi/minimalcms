@@ -12,6 +12,7 @@ public class Content {
     private int id;
 
     @ManyToOne
+    @JoinColumn(name = "CONTENTTYPE_ID", nullable = false)
     private ContentType contentType;
 
     @Lob
