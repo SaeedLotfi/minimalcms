@@ -5,6 +5,7 @@ import com.saeed.minimalcms.entity.ContentType;
 import com.saeed.minimalcms.entity.Field;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -12,7 +13,7 @@ import java.util.List;
 public class ContentTypeController {
     @GetMapping
     public List<ContentType> getAll() {
-        return ;
+        return new ArrayList<ContentType>();
     }
 
     @GetMapping("/{id}")
