@@ -1,8 +1,7 @@
 package com.saeed.minimalcms.entity;
 
 import jakarta.persistence.*;
-
-import javax.print.attribute.standard.Fidelity;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,8 +12,8 @@ public class Component {
 
     private String name;
 
-    @ManyToMany(mappedBy = "components")
-    private List<Field> fields;
+    @ManyToMany(mappedBy = "components", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Field> fields = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -22,5 +21,43 @@ public class Component {
             joinColumns = @JoinColumn(name = "COMPONENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "CONTENTTYPE_ID")
     )
-    private List<ContentType> contentTypes;
+    private List<ContentType> contentTypes = new ArrayList<>();
+
+    protected Component() {}
+
+    public Component(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<Field> getFields() {
+        return fields;
+    }
+
+    public void addField(Field field) {
+        this.fields.add(field);
+    }
+
+    public List<ContentType> getContentTypes() {
+        return contentTypes;
+    }
+
+    public void addContentType(ContentType contentType) {
+        this.contentTypes.add(contentType);
+    }
 }

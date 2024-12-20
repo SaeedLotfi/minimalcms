@@ -28,4 +28,34 @@ public class Content {
         ObjectMapper mapper = new ObjectMapper();
         value = mapper.writeValueAsString(valueMap);
     }
+
+    protected Content() {}
+
+    public Content(String value) {
+        this.value = value;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ContentType getContentType() {
+        return contentType;
+    }
+
+    public void setContentType(ContentType contentType) {
+        this.contentType = contentType;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }
