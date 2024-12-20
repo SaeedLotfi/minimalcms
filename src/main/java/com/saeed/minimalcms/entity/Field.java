@@ -1,5 +1,6 @@
 package com.saeed.minimalcms.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.saeed.minimalcms.enums.FieldType;
 import jakarta.persistence.*;
 
@@ -19,19 +20,21 @@ public class Field {
     private boolean isPrivate;
     private boolean isUnique;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "CONTENTTYPE_FIELD",
             joinColumns = @JoinColumn(name = "FIELD_ID"),
             inverseJoinColumns = @JoinColumn(name = "CONTENTTYPE_ID")
     )
+    @JsonIgnoreProperties("fields")
     private List<ContentType> contentTypes = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "COMPONENT_FIELD",
             joinColumns = @JoinColumn(name = "FIELD_ID"),
             inverseJoinColumns = @JoinColumn(name = "COMPONENT_ID"))
+    @JsonIgnoreProperties("fields")
     private List<Component> components = new ArrayList<>();
 
     protected Field() {}

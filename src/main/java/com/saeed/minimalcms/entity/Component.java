@@ -1,5 +1,6 @@
 package com.saeed.minimalcms.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +13,20 @@ public class Component {
 
     private String name;
 
-    @ManyToMany(mappedBy = "components", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(
+            mappedBy = "components",
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("components")
     private List<Field> fields = new ArrayList<>();
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "CONTENTTYPE_COMPONENT",
             joinColumns = @JoinColumn(name = "COMPONENT_ID"),
             inverseJoinColumns = @JoinColumn(name = "CONTENTTYPE_ID")
     )
+    @JsonIgnoreProperties("components")
     private List<ContentType> contentTypes = new ArrayList<>();
 
     protected Component() {}

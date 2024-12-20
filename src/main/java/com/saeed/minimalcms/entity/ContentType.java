@@ -1,5 +1,6 @@
 package com.saeed.minimalcms.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -20,17 +21,22 @@ public class ContentType {
     @Enumerated(EnumType.STRING)
     private com.saeed.minimalcms.enums.ContentType type = com.saeed.minimalcms.enums.ContentType.COLLECTION;
 
-    @OneToMany(mappedBy = "contentType")
+    @OneToMany(mappedBy = "contentType", fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("contentType")
     private List<Content> contents = new ArrayList<>();
 
     @ManyToMany(
             mappedBy = "contentTypes",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("contentTypes")
     private List<Field> fields = new ArrayList<>();
 
     @ManyToMany(
             mappedBy = "contentTypes",
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            fetch = FetchType.LAZY)
+    @JsonIgnoreProperties("contentTypes")
     private List<Component> components = new ArrayList<>();
 
     protected ContentType() {}
