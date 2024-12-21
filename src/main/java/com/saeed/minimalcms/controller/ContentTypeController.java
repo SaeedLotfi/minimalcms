@@ -10,6 +10,7 @@ import com.saeed.minimalcms.service.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -30,6 +31,14 @@ public class ContentTypeController {
     @GetMapping
     public List<ContentType> getAll() {
         return contentTypeService.findAll();
+    }
+
+    @GetMapping("/complex-filter")
+    public List<ContentType> getFilter() {
+        // return contentTypeService.filterContentTypes("about", "description", com.saeed.minimalcms.enums.ContentType.SINGLE);
+        // return contentTypeService.filterContentTypes("about", "about", "desc", com.saeed.minimalcms.enums.ContentType.SINGLE);
+        // return contentTypeService.advancedFilter("about", com.saeed.minimalcms.enums.ContentType.COLLECTION, "shared");
+        return new ArrayList<>();
     }
 
     @GetMapping("/{id}")

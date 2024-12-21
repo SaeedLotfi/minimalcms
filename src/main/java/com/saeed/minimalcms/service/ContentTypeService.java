@@ -35,4 +35,26 @@ public class ContentTypeService {
     public void delete(int id) {
         contentTypeRepository.deleteById(id);
     }
+
+    public List<ContentType> filterContentTypes(
+            String contentTypeName,
+            String fieldName,
+            com.saeed.minimalcms.enums.ContentType type) {
+        return contentTypeRepository.filterContentTypes(contentTypeName, fieldName, type);
+    }
+
+    public List<ContentType> filterContentTypes(
+            String contentTypeName,
+            String contentTypeApiName,
+            String fieldName,
+            com.saeed.minimalcms.enums.ContentType type) {
+        return contentTypeRepository.filterContentTypes(contentTypeName, contentTypeApiName, fieldName, type);
+    }
+
+    public List<ContentType> advancedFilter(
+            String name,
+            com.saeed.minimalcms.enums.ContentType type,
+            String componentName) {
+        return contentTypeRepository.advancedFilter(name, type, componentName);
+    }
 }

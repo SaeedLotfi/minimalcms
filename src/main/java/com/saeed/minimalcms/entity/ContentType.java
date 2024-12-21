@@ -7,6 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQuery(
+        name = "ContentType.advancedFilter",
+        query = "SELECT DISTINCT c FROM ContentType c " +
+                "LEFT JOIN c.components comp " +
+                "WHERE (:name IS NULL OR c.name LIKE CONCAT('%', :name, '%')) " +
+                "AND (:type IS NULL OR c.type = :type) " +
+                "AND (:componentName IS NULL OR comp.name LIKE CONCAT('%', :componentName, '%'))"
+)
 public class ContentType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
